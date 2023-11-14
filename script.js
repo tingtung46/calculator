@@ -14,21 +14,23 @@ function divide(firstOperand, secondOperand) {
     return a / b;
 };
 
-let firstOperand = Number(1);
-let secondOperand = Number(1);
-let operator = '+';
+function operate() {
+    let firstOperand = Number(1);
+    let secondOperand = Number(1);
+    let operator = '+';
 
-switch(operator) {
-    case '+':
-        console.log(add(firstOperand, secondOperand));
-        break;
-    case '-':
-        console.log(subtract(firstOperand, secondOperand));
-        break;
-    case 'x':
-        console.log(multiply(firstOperand, secondOperand));
-        break;
-    case ':':
-        console.log(divide(firstOperand, secondOperand));
-        break;
-}
+    switch(operator) {
+        case '+':
+            console.log(add(firstOperand, secondOperand));
+            break;
+        case '-':
+            console.log(subtract(firstOperand, secondOperand));
+            break;
+        case 'x':
+            console.log(multiply(firstOperand, secondOperand));
+            break;
+        case ':':
+            console.log(divide(firstOperand, secondOperand));
+            break;
+    };
+};
