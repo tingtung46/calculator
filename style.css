@@ -1,0 +1,23 @@
+* {
+    box-sizing: border-box;
+    font-size: 18px;
+}
+
+button {
+    width: 45px;
+    height: 45px;
+}
+
+.calculator {
+    width: 600px;
+    height: 100vh;
+    padding: 12px;
+}
+
+.display {
+    width: 90%;
+    height: 10%;
+    padding: 2px 8px;
+    margin: 2px;
+    border: solid 2px rgb(0, 0, 0);
+}
