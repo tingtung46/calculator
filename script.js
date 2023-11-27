@@ -1,5 +1,7 @@
 let firstOperand = '';
 let secondOperand = '';
+let currentOperator = null;
+let operation = '';
 
 const currentDisplay = document.querySelector('.current-display');
 const lastDisplay = document.querySelector('.last-display');
@@ -9,48 +11,82 @@ const deleteBtn = document.querySelector('.delete-btn');
 const clearsBtn = document.querySelector('.clear-btn');
 const equalsBtn = document.querySelector('.equals-btn');
 
-numberBtn.forEach((button) => 
-    button.addEventListener('click', () => appendNumber(button.textContent))
-);
 
-function appendNumber(number) {
-    if (currentDisplay.textContent === '0' && number === '0') return;
-    if (currentDisplay.textContent.includes('.') && number === '.') return;
-    currentDisplay.textContent += number;
+//Append number and operator to display
+function inputCurrentDisplay(task, value) {
+    if (task === 'add') {
+        if (value === 'Infinity') {
+            operation = '';
+        };
+        if (value !== 0 || operation !== 0) {
+            operation += value;
+            currentDisplay.textContent = operation;
+        };
+    };
+
+    if (task === 'delete') {
+        if (operation === 'Infinity') {
+            operation = '';
+        } else {
+            return operation.slice(0, -1);
+        };
+        currentDisplay.textContent = operation;
+    };
+
+    if (task === 'clear') {
+        operation = '';
+        if (value === 'full') {
+            firstOperand = '';
+            secondOperand = '';
+            currentOperator = '';
+            lastDisplay.textContent = '';
+            currentDisplay.textContent = operation;
+        }
+    };
 };
 
-function add(firstOperand, secondOperand) {
+function inputLastDisplay() {
+    
+};
+
+//Operate the calculator at back-end
+function clear() {
+    firstOperand = '';
+};
+
+function add(a, b) {
     return a + b;
 };
 
-function subtract(firstOperand, secondOperand) {
+function subtract(a, b) {
     return a - b;
 };
 
-function multiply(firstOperand, secondOperand) {
+function multiply(a, b) {
     return a * b;
 };
 
-function divide(firstOperand, secondOperand) {
+function divide(a, b) {
     return a / b;
 };
 
-function operate() {
-    let firstOperand = Number();
-    let secondOperand = Number();
-
+function operate(operator, a, b) {
+    a = Number(a);
+    b = Number(b);
     switch(operator) {
         case '+':
-            console.log(add(firstOperand, secondOperand));
+            return add(a, b);
             break;
         case '-':
-            console.log(subtract(firstOperand, secondOperand));
+            return subtract(a, b);
             break;
         case 'x':
-            console.log(multiply(firstOperand, secondOperand));
+            return multiply(a, b);
             break;
         case ':':
-            console.log(divide(firstOperand, secondOperand));
+            return divide(a, b);
             break;
+        default:
+            return null
     };
 };
