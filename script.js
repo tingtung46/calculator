@@ -45,15 +45,33 @@ function inputCurrentDisplay(task, value) {
     };
 };
 
-function inputLastDisplay() {
-    
+function inputLastDisplay(toLastDisplay) {
+    switch (toLastDisplay) {
+        case '+':
+            lastDisplay.textContent += '+';
+            break;
+        case '-':
+            lastDisplay.textContent += '-';
+            break;
+        case 'x':
+            lastDisplay.textContent += 'x';
+            break;
+        case ':':
+            lastDisplay.textContent += ':';
+            break;
+        default:
+            lastDisplay.textContent += `${toLastDisplay}`
+    }
 };
+
+numberBtn.forEach((button) => {
+    button.addEventListener('click', () => {
+        if (button.textContent === '.' && operation.includes('.')) return;
+        inputCurrentDisplay('add', button.textContent);
+    });
+});
 
 //Operate the calculator at back-end
-function clear() {
-    firstOperand = '';
-};
-
 function add(a, b) {
     return a + b;
 };
