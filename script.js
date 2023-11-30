@@ -9,7 +9,7 @@ const operatorBtn = document.querySelectorAll('.operator-btn');
 const numberBtn = document.querySelectorAll('.number-btn');
 const deleteBtn = document.querySelector('.delete-btn');
 const clearsBtn = document.querySelector('.clear-btn');
-const equalsBtn = document.querySelector('.equals-btn');
+const equalsBtn = document.querySelector('#equals-btn');
 
 
 //Append number and operator to display
@@ -71,6 +71,58 @@ numberBtn.forEach((button) => {
     });
 });
 
+function handleOperator(operator) {
+    if (firstOperand === '' && secondOperand === '' && currentOperator !== '' && operation !== '') {
+        firstOperand = operation;
+        currentOperator = operator;
+        inputLastDisplay(firstOperand);
+        inputLastDisplay(currentOperator);
+        inputCurrentDisplay('clear', 0);
+    };
+
+    if (firstOperand !== '' && currentOperator !== '' && operation !== '') {
+        secondOperand = operation;
+        inputLastDisplay(secondOperand);
+        operate(currentOperator, firstOperand, secondOperand);
+        currentOperator = operator;
+        inputLastDisplay(currentOperator);
+        firstOperand = operation;
+        inputCurrentDisplay('clear', 0);
+    };
+
+    if (firstOperand !== '' && currentOperator === '' && operation === '') {
+        inputLastDisplay(firstOperand);
+        currentOperator = operator;
+        inputLastDisplay(currentOperator);
+        secondOperand = operation;
+        inputCurrentDisplay('clear', 0);
+    };
+
+    if (firstOperand !== '' && currentOperator === '' && operation !== '') {
+        firstOperand = operation;
+        currentOperator = operator;
+        inputLastDisplay(firstOperand);
+        inputLastDisplay(currentOperator);
+        inputCurrentDisplay('clear', 0);
+    };
+};
+
+operatorBtn.forEach((button) => {
+    button.addEventListener('click', () => {
+        handleOperator(button.textContent);
+    });
+});
+
+equalsBtn.addEventListener('click', () => {
+    if (operation !== '' && firstOperand !== '') {
+        secondOperand = operation;
+        inputLastDisplay(secondOperand);
+        // inputLastDisplay('=');
+        inputCurrentDisplay('clear', 0);
+        operate(currentOperator, firstOperand, secondOperand);
+    };
+});
+
 //Operate the calculator at back-end
 function add(a, b) {
     return a + b;
@@ -93,18 +145,21 @@ function operate(operator, a, b) {
     b = Number(b);
     switch(operator) {
         case '+':
-            return add(a, b);
+            inputCurrentDisplay('add', add(a, b));
             break;
         case '-':
-            return subtract(a, b);
+            inputCurrentDisplay('add', subtract(a, b));
             break;
         case 'x':
-            return multiply(a, b);
+            inputCurrentDisplay('add', multiply(a, b));
             break;
         case ':':
-            return divide(a, b);
+            inputCurrentDisplay('add', divide(a, b));
             break;
         default:
             return null
     };
+    firstOperand = '';
+    secondOperand = '';
+    currentOperator = '';
 };
