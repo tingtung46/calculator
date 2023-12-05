@@ -7,8 +7,8 @@ const currentDisplay = document.querySelector('.current-display');
 const lastDisplay = document.querySelector('.last-display');
 const operatorBtn = document.querySelectorAll('.operator-btn');
 const numberBtn = document.querySelectorAll('.number-btn');
-const deleteBtn = document.querySelector('.delete-btn');
-const clearsBtn = document.querySelector('.clear-btn');
+const deleteBtn = document.querySelector('#delete-btn');
+const clearsBtn = document.querySelector('#clear-btn');
 const equalsBtn = document.querySelector('#equals-btn');
 
 
@@ -28,7 +28,7 @@ function inputCurrentDisplay(task, value) {
         if (operation === 'Infinity') {
             operation = '';
         } else {
-            return operation.slice(0, -1);
+            operation = operation.slice(0, -1);
         };
         currentDisplay.textContent = operation;
     };
@@ -38,7 +38,7 @@ function inputCurrentDisplay(task, value) {
         if (value === 'full') {
             firstOperand = '';
             secondOperand = '';
-            currentOperator = '';
+            currentOperator = null;
             lastDisplay.textContent = '';
             currentDisplay.textContent = operation;
         }
@@ -123,6 +123,14 @@ equalsBtn.addEventListener('click', () => {
     };
 });
 
+deleteBtn.addEventListener('click', () => {
+    inputCurrentDisplay('delete', 0);
+});
+
+clearsBtn.addEventListener('click', () => {
+    inputCurrentDisplay('clear', 'full');
+});
+
 //Operate the calculator at back-end
 function add(a, b) {
     return a + b;
@@ -137,12 +145,14 @@ function multiply(a, b) {
 };
 
 function divide(a, b) {
+    if (b === 0) return 'Oops!'
     return a / b;
 };
 
 function operate(operator, a, b) {
-    a = Number(a);
-    b = Number(b);
+    inputCurrentDisplay('clear', 0);
+    a = parseFloat(a);
+    b = parseFloat(b);
     switch(operator) {
         case '+':
             inputCurrentDisplay('add', add(a, b));
@@ -161,5 +171,5 @@ function operate(operator, a, b) {
     };
     firstOperand = '';
     secondOperand = '';
-    currentOperator = '';
+    currentOperator = null;
 };
