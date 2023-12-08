@@ -56,8 +56,8 @@ function inputLastDisplay(toLastDisplay) {
         case 'x':
             lastDisplay.textContent += 'x';
             break;
-        case ':':
-            lastDisplay.textContent += ':';
+        case '÷':
+            lastDisplay.textContent += '÷';
             break;
         default:
             lastDisplay.textContent += `${toLastDisplay}`
@@ -117,7 +117,7 @@ equalsBtn.addEventListener('click', () => {
     if (operation !== '' && firstOperand !== '') {
         secondOperand = operation;
         inputLastDisplay(secondOperand);
-        // inputLastDisplay('=');
+        inputLastDisplay('=');
         inputCurrentDisplay('clear', 0);
         operate(currentOperator, firstOperand, secondOperand);
     };
@@ -133,20 +133,24 @@ clearsBtn.addEventListener('click', () => {
 
 //Operate the calculator at back-end
 function add(a, b) {
-    return a + b;
+    const result = a + b;
+    return roundAnswer(result);
 };
 
 function subtract(a, b) {
-    return a - b;
+    const result = a - b;
+    return roundAnswer(result);
 };
 
 function multiply(a, b) {
-    return a * b;
+    const result = a * b;
+    return roundAnswer(result);
 };
 
 function divide(a, b) {
     if (b === 0) return 'Oops!'
-    return a / b;
+    const result = a / b;
+    return roundAnswer(result);
 };
 
 function operate(operator, a, b) {
@@ -163,7 +167,7 @@ function operate(operator, a, b) {
         case 'x':
             inputCurrentDisplay('add', multiply(a, b));
             break;
-        case ':':
+        case '÷':
             inputCurrentDisplay('add', divide(a, b));
             break;
         default:
@@ -173,3 +177,9 @@ function operate(operator, a, b) {
     secondOperand = '';
     currentOperator = null;
 };
+
+//Round the result when do an operation with 2 number of decimal
+//E.g. 0.1 + 0.2
+function roundAnswer(result) {
+    return Math.round(result * 1000) / 1000;
+}
