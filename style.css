@@ -1,23 +1,95 @@
 * {
     box-sizing: border-box;
     font-size: 18px;
+    font-family: 'Gotham Rounded', sans-serif;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    background: linear-gradient(to right, #00AAFF, #00FF6C);
 }
 
 button {
-    width: 45px;
-    height: 45px;
+    font-size: 2rem;
+    border: 1px solid white;
+    outline: none;
+    background-color: rgba(0, 0, 0, .75);
+    color: rgb(255, 255, 255);
 }
 
 .calculator {
     width: 600px;
-    height: 100vh;
-    padding: 12px;
+    min-height: 100vh;
+    padding: 24px;
+    margin: 0 auto;
 }
 
 .display {
-    width: 90%;
-    height: 10%;
+    background-color: rgba(255, 255, 255, .75);
+    width: 545px;
+    height: 170px;
     padding: 2px 8px;
-    margin: 2px;
-    border: solid 2px rgb(0, 0, 0);
+    margin: 0;
+}
+
+.last-display,
+.current-display {
+    height: 83px;
+    line-height: 83px;
+    text-align: end;
+}
+
+.last-display {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: rgba(0, 0, 0, .5);
+}
+
+.current-display {
+    font-size: 3rem;
+    color: rgba(0, 0, 0, .6);
+}
+
+.remove {
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-columns: repeat(2, 272.5px);
+    gap: 0;
+}
+
+.remove > button {
+    width: 272.5px;
+    height: 100px;
+    background-color: rgba(0, 0, 0, .65);
+}
+
+.main {
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-columns: 437.6px 107.4px;
+    min-height: fit-content;
+}
+
+.operator {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    align-content: center;
+}
+
+.btn {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: center;
+    align-content: center;
+}
+
+.btn > button {
+    min-height: 107.4px;
+}
+
+.operator > button {
+    background-color: rgba(0, 0, 0, .65);
+    min-height: 107.4px;
 }
