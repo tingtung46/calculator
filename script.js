@@ -59,6 +59,9 @@ function inputLastDisplay(toLastDisplay) {
         case '÷':
             lastDisplay.textContent += '÷';
             break;
+        case '/':
+            lastDisplay.textContent += '÷';
+            break;
         default:
             lastDisplay.textContent += `${toLastDisplay}`
     }
@@ -170,6 +173,9 @@ function operate(operator, a, b) {
         case '÷':
             inputCurrentDisplay('add', divide(a, b));
             break;
+        case '/':
+            inputCurrentDisplay('add', divide(a, b));
+            break;
         default:
             return null
     };
@@ -183,3 +189,17 @@ function operate(operator, a, b) {
 function roundAnswer(result) {
     return Math.round(result * 1000) / 1000;
 }
+
+//Keyboard input
+document.addEventListener('keyup', (e) => {
+    let keyValue = e.key;
+    if (keyValue === '.'  && operation.includes('.')) return
+    if ((keyValue >= 0 && keyValue < 10) || keyValue === '.') inputCurrentDisplay('add', keyValue);
+    if (keyValue === 'Enter') document.querySelector('#equals-btn').click();
+    if (keyValue === 'Backspace') document.querySelector('#delete-btn').click();
+    if (keyValue === 'c' || keyValue ==='C') document.querySelector('#clear-btn').click();
+    if (keyValue === '+'
+    || keyValue === '-'
+    || keyValue === '*'
+    || keyValue === '/') handleOperator(keyValue);
+});
